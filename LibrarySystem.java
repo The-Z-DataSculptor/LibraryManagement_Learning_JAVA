@@ -1,7 +1,6 @@
 import java.util.Scanner;
 
 public class LibrarySystem {
-    // Parallel arrays to store book data
     static String[] titles = new String[100];
     static String[] authors = new String[100];
     static int[] quantities = new int[100];
@@ -22,7 +21,7 @@ public class LibrarySystem {
             int choice;
             if (input.hasNextInt()) {
                 choice = input.nextInt();
-                input.nextLine(); // Clear newline
+                input.nextLine();
             } else {
                 System.out.println("Invalid input. Please enter a number between 1 and 4.");
                 input.nextLine();
@@ -31,7 +30,17 @@ public class LibrarySystem {
 
             switch (choice) {
                 case 1:
-                    System.out.println("Add book selected (implementation in progress).");
+                    System.out.print("Enter book title: ");
+                    String title = input.nextLine();
+                    System.out.print("Enter book author: ");
+                    String author = input.nextLine();
+                    System.out.print("Enter quantity: ");
+                    if (input.hasNextInt()) {
+                        int quantity = input.nextInt();
+                        addBook(title, author, quantity);
+                    } else {
+                        System.out.println("Invalid quantity. Must be a number.");
+                    }
                     break;
                 case 2:
                     System.out.println("Borrow book selected (implementation in progress).");
@@ -48,5 +57,30 @@ public class LibrarySystem {
             }
         }
         input.close();
+    }
+
+    static void addBook(String title, String author, int quantity) {
+        if (quantity <= 0) {
+            System.out.println("Error: Quantity must be greater than zero.");
+            return;
+        }
+
+        for (int i = 0; i < bookCount; i++) {
+            if (titles[i].equalsIgnoreCase(title)) {
+                quantities[i] += quantity;
+                System.out.println("Book already exists. Updated total quantity to: " + quantities[i]);
+                return;
+            }
+        }
+
+        if (bookCount < titles.length) {
+            titles[bookCount] = title;
+            authors[bookCount] = author;
+            quantities[bookCount] = quantity;
+            bookCount++;
+            System.out.println("New book added to the library successfully!");
+        } else {
+            System.out.println("Error: Library database is full!");
+        }
     }
 }
