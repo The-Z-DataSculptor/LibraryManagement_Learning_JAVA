@@ -43,10 +43,26 @@ public class LibrarySystem {
                     }
                     break;
                 case 2:
-                    System.out.println("Borrow book selected (implementation in progress).");
+                    System.out.print("Enter book title to borrow: ");
+                    String borrowTitle = input.nextLine();
+                    System.out.print("Enter quantity to borrow: ");
+                    if (input.hasNextInt()) {
+                        int borrowQty = input.nextInt();
+                        borrowBook(borrowTitle, borrowQty);
+                    } else {
+                        System.out.println("Invalid quantity. Must be a number.");
+                    }
                     break;
                 case 3:
-                    System.out.println("Return book selected (implementation in progress).");
+                    System.out.print("Enter book title to return: ");
+                    String returnTitle = input.nextLine();
+                    System.out.print("Enter quantity to return: ");
+                    if (input.hasNextInt()) {
+                        int returnQty = input.nextInt();
+                        returnBook(returnTitle, returnQty);
+                    } else {
+                        System.out.println("Invalid quantity. Must be a number.");
+                    }
                     break;
                 case 4:
                     running = false;
@@ -82,5 +98,42 @@ public class LibrarySystem {
         } else {
             System.out.println("Error: Library database is full!");
         }
+    }
+
+    static void borrowBook(String title, int quantity) {
+        if (quantity <= 0) {
+            System.out.println("Error: Borrow quantity must be greater than zero.");
+            return;
+        }
+
+        for (int i = 0; i < bookCount; i++) {
+            if (titles[i].equalsIgnoreCase(title)) {
+                if (quantities[i] >= quantity) {
+                    quantities[i] -= quantity;
+                    System.out.println("Success! You borrowed " + quantity + " copies of '" + title + "'.");
+                    return;
+                } else {
+                    System.out.println("Error: Only " + quantities[i] + " copies available.");
+                    return;
+                }
+            }
+        }
+        System.out.println("Error: Book not found in the library.");
+    }
+
+    static void returnBook(String title, int quantity) {
+        if (quantity <= 0) {
+            System.out.println("Error: Return quantity must be greater than zero.");
+            return;
+        }
+
+        for (int i = 0; i < bookCount; i++) {
+            if (titles[i].equalsIgnoreCase(title)) {
+                quantities[i] += quantity;
+                System.out.println("Success! You returned " + quantity + " copies of '" + title + "'.");
+                return;
+            }
+        }
+        System.out.println("Error: This book does not belong to our library system.");
     }
 }
