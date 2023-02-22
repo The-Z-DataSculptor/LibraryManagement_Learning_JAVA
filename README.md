@@ -1,31 +1,21 @@
-# 📚 Library Management System (Java)
+# Library Management System
 
-A menu-driven console application built in Java to manage library inventory operations using parallel arrays, procedural functions, and input validation.
+A simple console-based library system written in Java for my university programming assignment.
 
----
+## Overview
 
-## 📌 Features
+The program lets users manage a small library catalog directly from the terminal. It uses parallel arrays to keep track of book titles, authors, and available quantities without using an external database.
 
-- **Inventory Tracking:** Uses parallel arrays to synchronize book titles, authors, and quantities.
-- **Duplicate Prevention:** Updates existing quantities automatically if a book already exists.
-- **Transaction Handling:** Allows users to borrow and return books with stock validation.
-- **Defensive Input:** Handles non-integer input gracefully to avoid runtime crashes.
+## Features
 
----
+- Add new books to the inventory (updates quantity if the book already exists)
+- Borrow books (checks if copies are currently available)
+- Return books back to inventory
+- Basic input validation to prevent crashes from invalid menu choices
 
-## 🛠️ Concepts Demonstrated
+## How to Run
 
-- **Parallel Arrays:** `String[] titles`, `String[] authors`, and `int[] quantities`.
-- **Modular Functions:** `addBook()`, `borrowBook()`, and `returnBook()`.
-- **Control Structures:** `while` event loop, `switch` menu branching, and nested `for`/`if` validation.
-- **Scanner Stream Management:** Buffer clearing via `input.nextLine()`.
-
----
-
-## 🚀 How to Run
-
-1. **Compile:**
+1. Open your terminal in the project directory.
+2. Compile the code:
+   ```bash
    javac LibrarySystem.java
-
-2. **Run:**
-   java LibrarySystem
